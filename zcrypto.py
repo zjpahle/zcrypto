@@ -2,19 +2,19 @@ import numpy
 
 def hammingDistBin(a, b):
 	xord = xorThisShit(a,b)
-	return sum((xord[x] >> y) & 1 for y in xrange(8) for x in xrange(len(xord)))
+	return sum((xord[x] >> y) & 1 for y in range(8) for x in range(len(xord)))
 
 def genFreqTruth(text):
 	truth = [0]*256
-	for count in xrange(len(text)):
+	for count in range(len(text)):
 		truth[ord(text[count])] += 1
-	truth = [float(truth[x])/float(max(truth)) for x in xrange(len(truth))]
+	truth = [float(truth[x])/float(max(truth)) for x in range(len(truth))]
 	return truth
 
 def checkTruth (truth, mess):
 	mess = str(mess)
-	freqList = [0.0 for i in xrange(256)]
-	for count in xrange(len(mess)):
+	freqList = [0.0 for i in range(256)]
+	for count in range(len(mess)):
 		freqList[ord(mess[count])] += 1
 	letterCorr =float(numpy.correlate(truth,freqList))
 	return round(letterCorr,2)
@@ -26,7 +26,7 @@ def singleChrXor (key, message):
 		raise TypeError('message must be bytearray type')
 	if (len(key) > 1):
 		raise TypeError('key must have a length of 1')
-	return bytearray(key[0] ^ message[x] for x in xrange(len(message)))
+	return bytearray(key[0] ^ message[x] for x in range(len(message)))
 
 def getKey(item):
 	return item[0]
@@ -42,7 +42,7 @@ def xorThisShit(key, message):
 		raise TypeError('message must be bytearray type')
 	if len(key) != len(message):
 		raise TypeError('key must have the same length as message')
-	return bytearray(message[x] ^ key[x] for x in xrange(len(key)))
+	return bytearray(message[x] ^ key[x] for x in range(len(key)))
 
 #Challenge 3
 # fileIn = open('SherlockFull.txt', 'r')
