@@ -31,7 +31,7 @@ def singleChrXor (key, message):
 def getKey(item):
 	return item[0]
 
-def repeatingKeyXor (key, message):
+def repeatingKeyXor(key, message):
 	keyFull = (key*len(message))[:len(message)]
 	return xorThisShit(keyFull, message)
 
@@ -44,6 +44,18 @@ def xorThisShit(key, message):
 		raise TypeError('key must have the same length as message')
 	return bytearray(message[x] ^ key[x] for x in range(len(key)))
 
+def addpad(plain, blockSize):
+    if len(plain) > blockSize:
+        raise ValueError('Plaintext must be smaller than blocksize')
+    delta = blockSize-len(plain)
+    for x in range(delta):
+        plain = plain + '\x04'
+
+    return(plain)
+
+
+#print(addpad("YELLOW SUBMARINE", 64))
+    
 #Challenge 3
 # fileIn = open('SherlockFull.txt', 'r')
 # plainText = fileIn.read()
